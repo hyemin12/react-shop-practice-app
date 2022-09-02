@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { addCart, RootState } from "../modules/store";
+import { addCart, addItem, ItemProps, RootState } from "../modules/store";
 
 function Card() {
   const state = useSelector((state: RootState) => state.stock);
   const dispatch = useDispatch();
+
   return (
     <div className="cards_container">
       {state.map((item) => (
@@ -21,7 +22,7 @@ function Card() {
               <button
                 className="btn_cart"
                 onClick={() => {
-                  dispatch(addCart(item.id));
+                  dispatch(addCart(item));
                 }}
               >
                 <i className="fas fa-plus"></i>
