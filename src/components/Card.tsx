@@ -1,11 +1,13 @@
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { ItemProps } from "../modules/stock";
+import { addCart, RootState } from "../modules/store";
 
 function Card() {
-  const data = useSelector((state: ItemProps[]) => state);
+  const state = useSelector((state: RootState) => state.stock);
+  const dispatch = useDispatch();
   return (
     <div className="cards_container">
-      {data.map((item) => (
+      {state.map((item) => (
         <div className="card" key={item.id}>
           <a href={item.pieUrl} target="_blank" rel="noreferrer">
             <video src={item.thumbnail} autoPlay loop className="card_video" />
@@ -16,7 +18,12 @@ function Card() {
                 <h4 className="card_title">{item.title}</h4>
                 <p className="card_price">$ {item.price}</p>
               </div>
-              <button className="btn_cart">
+              <button
+                className="btn_cart"
+                onClick={() => {
+                  dispatch(addCart(item.id));
+                }}
+              >
                 <i className="fas fa-plus"></i>
               </button>
             </div>
