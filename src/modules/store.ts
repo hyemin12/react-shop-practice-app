@@ -1,6 +1,4 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { useState } from "react";
-// import { useState } from "react";
 
 // 액션생성
 const ADD_CART = "ADD_CART" as const;
@@ -35,7 +33,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
     price: 10,
     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-02",
@@ -46,7 +44,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
     price: 20,
     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-03",
@@ -57,7 +55,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/macOS_Folder_Concept_-_Folder_concept.mp4",
     price: 30,
     pieUrl: "https://cloud.protopie.io/p/acde5ccdf9",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-04",
@@ -68,7 +66,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Translator.mp4",
     price: 40,
     pieUrl: "https://cloud.protopie.io/p/b91edba11d",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-05",
@@ -79,7 +77,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/In-car_voice_control.mp4",
     price: 50,
     pieUrl: "https://cloud.protopie.io/p/6ec7e70d1a",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-06",
@@ -93,7 +91,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/The_Adventures_of_Proto.mp4",
     price: 60,
     pieUrl: "https://cloud.protopie.io/p/95ee13709f",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-07",
@@ -104,7 +102,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/sunglasses_shop_app.mp4",
     price: 70,
     pieUrl: "https://cloud.protopie.io/p/6f336cac8c",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-08",
@@ -121,7 +119,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/minimalist-text-editor.mp4",
     price: 80,
     pieUrl: "https://cloud.protopie.io/p/946f88f8d3",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-09",
@@ -132,7 +130,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/TV.mp4",
     price: 90,
     pieUrl: "https://cloud.protopie.io/p/60ee64cda0",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-10",
@@ -144,7 +142,7 @@ let initialState = [
     price: 90,
     pieUrl:
       "https://cloud.protopie.io/p/09ce2fdf84/21?ui=true&mockup=true&touchHint=true&scaleToFit=true&cursorType=touch",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-11",
@@ -155,7 +153,7 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Whack_a_mole.mp4",
     price: 90,
     pieUrl: "https://cloud.protopie.io/p/ab796f897e",
-    quan: 0,
+    quan: 1,
   },
   {
     id: "pp-12",
@@ -167,23 +165,36 @@ let initialState = [
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Voice_note_with_sound_wave.mp4",
     price: 90,
     pieUrl: "https://cloud.protopie.io/p/7a0d6567d2",
-    quan: 0,
+    quan: 1,
   },
 ];
-const cartState: ItemsState = [];
+
 const cart = createSlice({
   name: "cart",
-  initialState: initialState,
+  initialState: [
+    {
+      id: "pp-12",
+      title: "Voice Note",
+      artist: "Haerin Song",
+      desc: `Made by Haerin Song
+            (Soda Design)`,
+      thumbnail:
+        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Voice_note_with_sound_wave.mp4",
+      price: 90,
+      pieUrl: "https://cloud.protopie.io/p/7a0d6567d2",
+      quan: 1,
+    },
+  ],
   reducers: {
-    addItem: (state: ItemsState, action) => {
-      //   let found = state.findIndex((a) => a.id === action.payload);
-      //   if (found >= 0) {
-      //     // state[found].quan++;
-      //   } else {
-      //     state.push(action.payload);
-      //   }
-      //   console.log(state);
-      //   console.log(Array.isArray(state));
+    addItem: (state, action) => {
+      let index = state.findIndex((a) => a.id === action.payload.id);
+      console.log(index);
+      if (index >= 0) {
+        state[index].quan++;
+      } else {
+        state.push(action.payload);
+      }
+      console.log(state);
     },
     addCount(state, action) {
       let index = state.findIndex((a) => a.id === action.payload);
@@ -201,28 +212,20 @@ const cart = createSlice({
       const newArr = state.filter((order) => order.id !== action.payload);
       return newArr;
     },
+    removeAll(state) {
+      state = [];
+      return state;
+    },
   },
 });
 
 const stock = createSlice({
   name: "stock",
   initialState: initialState,
-  reducers: {
-    addCart(state, action) {
-      let found = state.findIndex((a) => a.id === action.payload);
-      if (found >= 0) {
-        state[found].quan++;
-      } else {
-        const copy = [...cartState];
-        copy.push(action.payload);
-      }
-      console.log(action.payload);
-      console.log(cartState);
-    },
-  },
+  reducers: {},
 });
-export let { addItem, addCount, minusCount, removeItem } = cart.actions;
-export let { addCart } = stock.actions;
+export let { addItem, addCount, minusCount, removeItem, removeAll } =
+  cart.actions;
 
 const store = configureStore({
   reducer: {

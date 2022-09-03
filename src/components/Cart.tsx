@@ -1,12 +1,40 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCount, minusCount, removeItem, RootState } from "../modules/store";
+import {
+  addCount,
+  minusCount,
+  removeItem,
+  removeAll,
+  RootState,
+} from "../modules/store";
 
 function Cart() {
   const state = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  useEffect(() => {}, [state]);
+  /* 총금액 계산 */
+  const handleTotal = () => {
+    let priceArr: number[] = [];
+    state.map((order) => {
+      const result = order.price * order.quan;
+      // setTotalPrice(result)
+      priceArr.push(result);
+      const total = priceArr.reduce((a, b) => a + b);
+      setTotalPrice(total);
+    });
+  };
+  useEffect(() => {
+    handleTotal();
+  }, [state]);
+
+  function handleOrder() {
+    if (state.length === 0) {
+      alert("장바구니가 비어있습니다.");
+    } else {
+      alert("준비중인 서비스입니다.");
+    }
+  }
   if (state.length === 0) {
     return (
       <aside>
@@ -29,7 +57,7 @@ function Cart() {
             state.map((item, i) => {
               const { thumbnail, title, id, price, quan } = item;
               return (
-                <div key={i}>
+                <div key={i} className="cart_item_wrapper">
                   <div className="row_start">
                     <div className="cart_thumnail">
                       <video
@@ -39,7 +67,7 @@ function Cart() {
                     </div>
                     <p>{title}</p>
                   </div>
-                  <div className="row">
+                  <div className="row quan_price">
                     <div className="quan_wrapper">
                       <div
                         className="btn_quan"
@@ -62,15 +90,13 @@ function Cart() {
                     <p>$ {price && quan && price * quan}</p>
                   </div>
 
-                  <div className="row_right">
-                    <div
-                      className="btn_delete"
-                      onClick={() => {
-                        dispatch(removeItem(id));
-                      }}
-                    >
-                      <i className="fas fa-times"></i>
-                    </div>
+                  <div
+                    className="btn_delete position"
+                    onClick={() => {
+                      dispatch(removeItem(id));
+                    }}
+                  >
+                    <i className="fas fa-times"></i>
                   </div>
                 </div>
               );
@@ -80,13 +106,20 @@ function Cart() {
           <h4>전체금액</h4>
 
           <div className="row_start">
-            <p>$</p>
-            <div className="btn_delete">
+            <p>$ {totalPrice}</p>
+            <div
+              className="btn_delete"
+              onClick={() => {
+                dispatch(removeAll());
+              }}
+            >
               <i className="fas fa-trash"></i>
             </div>
           </div>
         </div>
-        <button className="btn_order">주문하기</button>
+        <button className="btn_order" onClick={handleOrder}>
+          주문하기
+        </button>
       </div>
     </aside>
   );

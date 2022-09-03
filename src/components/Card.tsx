@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { addCart, addItem, ItemProps, RootState } from "../modules/store";
+import { addItem, ItemProps, RootState } from "../modules/store";
 
 function Card() {
   const state = useSelector((state: RootState) => state.stock);
@@ -22,7 +22,7 @@ function Card() {
               <button
                 className="btn_cart"
                 onClick={() => {
-                  dispatch(addCart(item));
+                  dispatch(addItem(item));
                 }}
               >
                 <i className="fas fa-plus"></i>
