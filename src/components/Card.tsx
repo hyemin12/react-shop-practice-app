@@ -1,7 +1,6 @@
-import { ReactEventHandler, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { addItem, ItemProps, RootState } from "../modules/store";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, RootState } from "../modules/store";
 
 function Card() {
   const initState = useSelector((state: RootState) => state.stock);
