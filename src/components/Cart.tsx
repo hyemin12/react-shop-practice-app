@@ -18,7 +18,6 @@ function Cart() {
     let priceArr: number[] = [];
     state.map((order) => {
       const result = order.price * order.quan;
-      // setTotalPrice(result)
       priceArr.push(result);
       const total = priceArr.reduce((a, b) => a + b);
       setTotalPrice(total);

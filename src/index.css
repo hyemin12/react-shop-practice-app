@@ -66,11 +66,32 @@ button:hover {
 }
 
 /* Card.tsx */
-.cards_container {
+.card_container {
+  padding: 14px;
+}
+.fiter_wrapper {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+  list-style: none;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.fiter_wrapper::before {
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: #454545;
+  position: absolute;
+  top: 4px;
+  right: 61px;
+}
+.card_list {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  padding: 14px;
 }
 .cart_item_wrapper {
   position: relative;

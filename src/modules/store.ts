@@ -1,10 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-// 액션생성
-const ADD_CART = "ADD_CART" as const;
-const ADD_COUNT = "ADD_COUNT" as const;
-const MINUS_COUNT = "MINUS_COUNT" as const;
-
+// 액션타입
 export type StockAction =
   | ReturnType<typeof addItem>
   | ReturnType<typeof addCount>
@@ -139,7 +135,7 @@ let initialState = [
     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital products.",
     thumbnail:
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Credit_Card_App.mp4",
-    price: 90,
+    price: 100,
     pieUrl:
       "https://cloud.protopie.io/p/09ce2fdf84/21?ui=true&mockup=true&touchHint=true&scaleToFit=true&cursorType=touch",
     quan: 1,
@@ -163,7 +159,7 @@ let initialState = [
             (Soda Design)`,
     thumbnail:
       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Voice_note_with_sound_wave.mp4",
-    price: 90,
+    price: 120,
     pieUrl: "https://cloud.protopie.io/p/7a0d6567d2",
     quan: 1,
   },
