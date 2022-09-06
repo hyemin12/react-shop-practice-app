@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# 타입스크립트 쇼핑몰 앱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="https://h-m-shop.netlify.app/" target="_blank"><img src="https://github.com/hyemin12/portfolio_renewal/blob/master/public/assets/tsc-shop.png?raw=true" alt="쇼핑몰" style="background-color:#ccc;" /></a>
 
-## Available Scripts
+<p>이미지를 클릭하면 사이트로 이동합니다.</p>
 
-In the project directory, you can run:
+<br>
+<hr>
+<br>
 
-### `npm start`
+## - 패키지
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-react<br>
+-typescript<br>
+-react-redux<br>
+-reduxjs/toolkit<br>
+<br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<hr>
+<br>
 
-### `npm test`
+## - redux toolkit을 사용한 store 생성
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. configureStore()
 
-### `npm run build`
+```js
+"src/modules/store.ts";
+const store = configureStore({
+  reducer: {
+    stock: stock.reducer,
+    cart: cart.reducer,
+  },
+});
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export default store;
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> 만약 createStore()를 사용하고 싶다면 하단 내용 작성 후 사용하기
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+import {legacy createstore as createstore} from 'redux'
+```
 
-### `npm run eject`
+<br><hr>
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 2. createSlice()
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+사용방법
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```js
+"src/modules/store.ts";
 
-## Learn More
+// 기본값설정
+const initialState= {}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+// const 적지 않고 바로 createSlice()해도 됨
+const 리듀서이름 = cretateSlice({
+  name: '리듀서이름',
+  initialState: '기본값설정'
+  reducers: {
+    // 액션 작성
+  }
+})
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+// 액션 사용을 위한 export
+export const {액션명} = 리듀서이름.actions;
+
+// store에 리듀서 저장
+const store = configureStore({
+  reducer:{
+    리듀서이름: 리듀서이름.reducer
+  }
+})
+export default store
+```
