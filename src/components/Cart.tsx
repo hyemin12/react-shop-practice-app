@@ -59,10 +59,7 @@ function Cart() {
                 <div key={i} className="cart_item_wrapper">
                   <div className="row_start">
                     <div className="cart_thumnail">
-                      <video
-                        src={thumbnail}
-                        style={{ height: "100%", objectFit: "cover" }}
-                      />
+                      <img src={thumbnail} alt={title} />
                     </div>
                     <p>{title}</p>
                   </div>

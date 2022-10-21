@@ -43,12 +43,9 @@ function Card() {
         {state.map((item) => (
           <div className="card" key={item.id}>
             <a href={item.pieUrl} target="_blank" rel="noreferrer">
-              <video
-                src={item.thumbnail}
-                autoPlay
-                loop
-                className="card_video"
-              />
+              <div className="card_video">
+                <img src={item.thumbnail} alt={item.title} />
+              </div>
             </a>
             <div className="card_body">
               <div className="card_title_wrapper">
