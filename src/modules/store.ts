@@ -184,13 +184,12 @@ const cart = createSlice({
   reducers: {
     addItem: (state, action) => {
       let index = state.findIndex((a) => a.id === action.payload.id);
-      console.log(index);
+
       if (index >= 0) {
         state[index].quan++;
       } else {
         state.push(action.payload);
       }
-      console.log(state);
     },
     addCount(state, action) {
       let index = state.findIndex((a) => a.id === action.payload);
