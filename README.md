@@ -1,6 +1,6 @@
 # 타입스크립트 쇼핑몰 앱
 
-<a href="https://h-m-shop.netlify.app/" target="_blank"><img src="https://github.com/hyemin12/portfolio_renewal/blob/master/public/assets/tsc-shop.png?raw=true" alt="쇼핑몰" style="background-color:#ccc;" /></a>
+<a href="https://h-m-shop.netlify.app/" target="_blank"><img src="https://raw.githubusercontent.com/hyemin12/2022_portfolio/master/public/assets/tsc-shop.webp" alt="쇼핑몰" style="background-color:#ccc;" /></a>
 
 <p>이미지를 클릭하면 사이트로 이동합니다.</p>
 
